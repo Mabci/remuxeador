@@ -1,0 +1,44 @@
+# ============================================
+# Remuxeador FFmpeg v0.1 - Dependencias
+# ============================================
+
+# Interfaz Gráfica
+PyQt6>=6.6.0
+
+# Previsualización de Video
+python-mpv>=1.0.0
+
+# ============================================
+# REQUISITOS DEL SISTEMA
+# ============================================
+#
+# OBLIGATORIO:
+# - Python 3.10+
+# - MKVToolNix (mkvmerge)
+#   Windows: https://mkvtoolnix.download/downloads.html
+#   Linux: sudo apt install mkvtoolnix
+#   macOS: brew install mkvtoolnix
+#
+# OPCIONAL (para previsualización):
+# - MPV Player
+#   Windows: Incluido en external/mpv/
+#   Linux: sudo apt install mpv libmpv-dev
+#   macOS: brew install mpv
+#
+# ============================================
+# INSTALACIÓN
+# ============================================
+#
+# 1. Crear entorno virtual (recomendado):
+#    python -m venv .venv
+#    .venv\Scripts\activate  (Windows)
+#    source .venv/bin/activate  (Linux/macOS)
+#
+# 2. Instalar dependencias:
+#    pip install -r requirements.txt
+#
+# 3. Instalar MKVToolNix (ver enlaces arriba)
+#
+# 4. Ejecutar:
+#    python main.py
+#

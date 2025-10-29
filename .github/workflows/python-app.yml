@@ -1,0 +1,90 @@
+# GitHub Actions workflow para CI/CD básico
+# Este workflow verifica que el código sea válido y las dependencias se instalen correctamente
+
+name: Python Application CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Lint with flake8 (if available)
+      run: |
+        pip install flake8
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      continue-on-error: true
+
+    - name: Check code structure
+      run: |
+        python -c "import sys; print(f'Python {sys.version}')"
+        python -c "from core.domain import models, enums; print('✅ Core imports OK')"
+        python -c "from infrastructure.config import get_settings; print('✅ Infrastructure imports OK')"
+      shell: bash
+
+    # Nota: No ejecutamos tests porque aún no están implementados
+    # Descomentar cuando se agreguen tests:
+    # - name: Test with pytest
+    #   run: |
+    #     pip install pytest pytest-cov
+    #     pytest tests/ --cov=core --cov=infrastructure --cov-report=xml
+
+    - name: Verify main.py syntax
+      run: python -m py_compile main.py
+
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install black isort mypy
+
+    - name: Check code formatting with black
+      run: black --check --diff .
+      continue-on-error: true
+
+    - name: Check import sorting with isort
+      run: isort --check-only --diff .
+      continue-on-error: true
+
+    - name: Type checking with mypy
+      run: mypy core/ infrastructure/ --ignore-missing-imports
+      continue-on-error: true

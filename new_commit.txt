@@ -1,0 +1,10 @@
+Initial release v0.1.0 - Remuxeador FFmpeg
+
+- Arquitectura limpia en 3 capas (core, infrastructure, presentation)
+- Modo Assembler para remuxeo individual
+- Modo Dual Sync para procesamiento por lotes
+- Interfaz PyQt6 con patron MVVM
+- Soporte MKVMerge y FFprobe
+- Previsualizacion con MPV
+- Sistema de logging completo
+- Documentacion completa con enlaces correctos
