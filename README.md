@@ -183,10 +183,8 @@ remuxeador-ffmpeg/
   - Windows: Instalar desde el sitio oficial
   - Linux: `sudo apt install mkvtoolnix`
   - macOS: `brew install mkvtoolnix`
-
-### Opcionales (pero recomendados)
 - **MPV Player** - Para previsualización de video
-  - Windows: [Descargar MPV](https://mpv.io/installation/) o usar [Shinchiro builds](https://sourceforge.net/projects/mpv-player-windows/files/)
+  - Windows: [Descargar MPV](https://sourceforge.net/projects/mpv-player-windows/files/)
   - Linux: `sudo apt install mpv libmpv-dev`
   - macOS: `brew install mpv`
 
