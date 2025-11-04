@@ -18,8 +18,6 @@ python-mpv>=1.0.0
 #   Windows: https://mkvtoolnix.download/downloads.html
 #   Linux: sudo apt install mkvtoolnix
 #   macOS: brew install mkvtoolnix
-#
-# OPCIONAL (para previsualización):
 # - MPV Player
 #   Windows: Incluido en external/mpv/
 #   Linux: sudo apt install mpv libmpv-dev
